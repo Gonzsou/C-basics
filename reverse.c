@@ -11,7 +11,7 @@
  #include<stdlib.h>
  
  int main () {
-	 int i, n, digit;
+	 int n, digit;
 	 printf("Please insert a 3 digit number: ");
 	 scanf("%3d", &n);		// %3d format only scans first 3 digits introduced, ignoring all extra characters which might have been introduced 
 	 
