@@ -1,29 +1,36 @@
+/*
+ * C - Basics
+ * Fibonacci sequence up to given number of elements
+ * (fibonacci.c) v20190727
+ *
+ * Gonzsou
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main () {
-	
-	int i=2, n;
-	long long num=1;
+	int previous, current, i, n, temp;
 	
 	system("clear");
 	
 	printf("Indique um número ");
 	scanf("%d", &n);
 		
-	long long *vetor;
-	vetor = (long long *)malloc(n*sizeof(long long));
-
-	vetor[0]=0;
-	vetor[1]=1;
-	printf("i:0 num:%lld\ni:1 num:%lld\n", vetor[0], vetor[1]);
-	for(i = 2; i<n; i++){		
-		num=vetor[i-1]+vetor[i-2];
-		if(num == vetor[i-1]+vetor[i-2]){
-			vetor[i]=num;
-			printf("i:%d num:%lld\n", i, vetor[i]);
+	previous =0;
+	current = 1;
+	printf ("Fibonacci sequence up to the first %d elements: \n%d, %d, ", n, previous, current);
+	for (i=2; i<n; i++){
+		temp = current;
+		current = previous + current;
+		previous = temp;
+		if(i==n-1){
+			printf("%d", current);
+		} else {
+			printf("%d, ", current);
 		}
-	}
-	
+	} 
+	printf("\n");
 	return (0);
 }
