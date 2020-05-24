@@ -35,8 +35,6 @@ void NumerosIrmaos(){
 			}         	
 		}
 	}
-//	printf("\n fator1: %d ", fator1);
-//	printf("\n fator2: %d ", fator2);
 	if(fator1!=fator2) {
 		printf("\n%d e %d não sao numeros irmãos.\n", num1, num2);
 	} else {
