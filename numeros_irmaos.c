@@ -1,48 +1,42 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
-void NumerosIrmaos(){
-  	int num1, num2;
-  	printf("\n Please enter two integers:  ");
-  	scanf("%d %d", &num1, &num2);
-
-	int i, j, isPrime, fator1=1, fator2=0; 
-	for (i = 2; i <= num1; i++) {
-		if(num1 % i == 0) {
-			isPrime = 1;
-			for (j = 2; j <= i/2; j++) {
-				if(i % j == 0) {
-					isPrime = 0;
-					break;
-				}
-			} 
-			if(isPrime == 1) {
-				fator1=i;
-			}         	
-		}
-	}
-	for (i = 2; i <= num2; i++) {
-		if(num2 % i == 0) {
-			isPrime = 1;
-			for (j = 2; j <= i/2; j++) {
-				if(i % j == 0) {
-					isPrime = 0;
-					break;
-				}
-			} 
-			if(isPrime == 1) {
-				fator2=i;
-			}         	
-		}
-	}
-	if(fator1!=fator2) {
-		printf("\n%d e %d não sao numeros irmãos.\n", num1, num2);
+int NumerosIrmaos(int num1, int num2){
+	int min, max;
+	if (num1<num2){
+		min = num1;
+		max = num2;
 	} else {
-		printf("\n%d e %d sao numeros irmãos.\n", num1, num2);
+		min=num2;
+		max=num1;
 	}
+	int i, j, primo;
+	for (i = 2; i <= max; i++) {
+     	if(max % i == 0) {
+   			primo = 1;
+			for (j = 2; j <= i/2; j++) {
+				if(i % j == 0) {
+					primo = 0;
+					break;
+				}
+			} 
+			if(primo == 1) {
+				printf("\n %d is a Prime Factor ", i);
+				if(min%i!=0){
+					printf("\n %d e %d nao sao numeros irmaos.", min, max);
+					return 0;
+				}
+			}	          	
+		}
+	}
+	printf("\n %d e %d sao numeros irmaos.", min, max);
+	return 1;
 }
 
-int main(void) {
-	NumerosIrmaos();
+int main (void){
+	int num1=3, num2=15;
+	NumerosIrmaos(num1, num2);
+	
 	return 0;
 }
