@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define MAX_BUFF 32
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    
+    //request a number between 1 and 1000
+    int n=0;
+    do {
+        scanf("%d", &n);    
+    } while(n < 1 || n > 1000);
+    
+    // initial allocation for a buffer of MAX_BUFF elements of type char
+    char *arr = (char *)malloc(MAX_BUFF*sizeof(char));    
+    
+    //test memory allocation
+    if(!arr){
+        perror("unable to allocate memory");
+        exit(EXIT_FAILURE);
+    }           
+    
+    //read a line of input from stdin into the dinamically allocated buffer
+    while (fgets(arr, MAX_BUFF*sizeof(char), stdin)!=NULL){
+        //reallocate memory the input reaches the end of the buffer array
+        if(arr[strlen(arr)-1]=='\0'){
+            arr = realloc(arr, MAX_BUFF*2);
+            //test memory reallocation    
+            if(!arr){
+                perror("unable to reallocate memory");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+
+    /*initialize a variabel to store the sum of tokens */
+    long sum= 0; 
+    
+    /*read buffer backwards*/
+    int i = 0, j = 0, token=0;
+    for(i = (strlen(arr)); i >= 0; i--){
+        //if space encountered, reset the power iterator and add token's value to sum 
+        if(*(arr+i) == ' '){
+            sum += token;
+            j=0;
+            continue;
+        }
+        //while ' ' not reached build token number using addition base 10, update iterator
+        token = (atoi(arr+i) * pow(1, j));
+        ++j;
+    }
+
+    //allocated memory no longer needed, free it and point it to NULL
+    free(arr);
+    arr = NULL;
+    
+    //add value of last token to sum (1st token of the input) and print result to console
+    sum += token;  
+    printf("%ld", sum);    
+
+    return 0;
+}
