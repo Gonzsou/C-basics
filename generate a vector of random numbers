@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+unsigned int randaux()
+{
+  static long seed=1;
+  return(((seed = seed * 214013L + 2531011L) >> 16) & 0x7fff);
+}
+
+/* create a vector with n random numbers between 0 to base */
+int *VectorAleatorio(int n, int base){
+    int *vector = NULL;
+    int i =0;
+    
+    /* allocate memory for a vector of n integers */
+    vector = (int *)malloc(n*sizeof(int));
+    if(vector){
+        /* generate a random number for each elemento of the vector */
+        for(i=0; i<n; i++){
+            vector[i] = randaux() % base;
+        }
+    }
+    return vector;
+}
+
+/* print vector elements to the console */
+void MostraVector(int *v, int n){
+    int i = 0;
+    for (i=0; i<n; i++){
+        printf("%d ", v[i]);
+    }
+}
+
+int main() {
+    int *vector, n, base;
+    
+    /* initializes the random number generator rand() or randaux() */
+    srand(1);
+    
+    /* Request number of elements or vector's dimension */
+    /* printf("Dimensao: %d", n); */
+    scanf("%d", &n);
+    
+    /*Request a value for base, which limits max value of generated number*/  
+    /* printf("Base: %d", n); */
+    scanf("%d", &base);
+    
+    /* Call the function to generate a vector and pass the returned vector to a pointer of the same type*/
+    vector = VectorAleatorio(n, base);
+    /* check if returned vector not NULL and if so print it to console */
+    if(vector){
+        MostraVector(vector, n);
+        /* liberate allocated memory of generated vector using the function */
+        free(vector);    
+    }
+    return 0;
+}
