@@ -32,8 +32,8 @@ struct SPerson ReadPerson(){
     
     printf("Data de nascimento (dd-mm-aaaa): ");
     scanf("%d-%d-%d", 
-        &person.birthdate.month, 
-        &person.birthdate.day,
+        &person.birthdate.day, 
+        &person.birthdate.month,
         &person.birthdate.year);
 
         getchar();
