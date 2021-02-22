@@ -82,3 +82,83 @@ int main() {
     
     return 0;
 }                                                                                                                                   
+#include <stdio.h>
+
+#define MAXSTR 255
+
+typedef struct {
+    int year, month, day;
+} TData;
+
+
+typedef struct {
+    char *name;
+    char gender;
+    TData birthdate;
+    char *address;
+    char *email;
+    long mobile;
+} TPerson;
+
+void ReadPerson(TPerson *person){
+    char str[MAXSTR];
+    
+    printf("Nome: ");
+    fgets(str, MAXSTR, stdin);
+    person->name = (char*)malloc(strlen(str)+1);
+    strcpy(person->name, str);
+
+    printf("Sexo: ");
+    scanf("%c", &person->gender);
+    
+    printf("Data de nascimento (dd-mm-aaaa): ");
+    scanf("%d-%d-%d", 
+        &person->birthdate.day, 
+        &person->birthdate.month,
+        &person->birthdate.year);
+
+        getchar();
+    
+    printf("Morada: ");
+    fgets(str, MAXSTR, stdin);
+    person->address = (char *)malloc(strlen(str)+1);
+    strcpy(person->address,str);
+
+    printf("Email: ");
+    fgets(str, MAXSTR, stdin);
+    person->email = (char *)malloc(strlen(str)+1);
+    strcpy(person->email,str);
+    
+    printf("Telefone: ");
+    scanf("%ld", &person->mobile); 
+}
+
+void ShowPerson(TPerson *person){
+    printf("\nNome: %s", (*person).name);
+    printf("Sexo: %c\n", person->gender);
+    printf("Data de Nascimneto: %d-%d-%d\n",  
+        (*person).birthdate.day,
+        person->birthdate.month,
+        person->birthdate.year);
+    getchar();
+    printf("Morada: %s", person->address);
+    printf("Email: %s", (*person).email);
+    getchar();
+    printf("Telefone: %ld", person->mobile);
+}
+
+void Libertar(TPerson *person){
+        free(person->name);
+        free(person->address);
+        free(person->email);
+}
+
+int main() {
+    
+    TPerson person;
+    ReadPerson(&person);
+    ShowPerson(&person);
+    Libertar(&person);
+
+    return 0;
+}
