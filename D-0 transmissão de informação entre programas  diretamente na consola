@@ -1,0 +1,8 @@
+Isto é útil para a escrita de casos de teste e verificacao de resultados dos programas
+
+passagem do output de um programa1 para input de um programa2, feito diretamente na consola 
+c:\>     programa1 | programa2
+
+insercao de dados do ficheiro input.txt no programa1, o output do programa1 é passado como input ao parograma2, cujo output é colocado no ficheiro input.txt 
+c:\>      programa1 < input.txt  |  programa2 > output.txt
+
