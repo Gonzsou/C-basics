@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+int main() {
+    
+/*
+    NOTAS leitura de ficheiro:
+    
+    //abertura em modo de texto, para leitura, retorna NULL se nao abrir
+    FILE *f = fopen("ficheiro", "rt");
+    
+    // identico ao scanf, mas antecedendo um ficheiro aberto para leitura
+    fscanf(f, ...);
+    
+    // identico a gets, mas com indicacao do tamanho maximo da string
+    fgets(str, MAXSTR, f);      //retorna NULL caso ocorra um erro, caso contrario retorna a linha lida 
+    
+    // testa se foi atingido o final do ficheiro
+    feof(f);    //retorna valor nao nulo se o sinal EOF está ativo (ie, final de ficheiro detetado), caso contrario retorna zero.
+    
+    // Fecha o ficheiro apos já nao ser necesário  
+    fclose(f); 
+*/
+
+/*
+    NOTAS gravar ficheiro:
+    
+    // abertura em modo de texto, para leitura, retorna NULL se nao abrir
+    FILE *f = fopen(ficheiro, "wt");
+    
+    // identico a scanf, mas antecedendo um ficheiro aberto para leitura
+    fprint(f, ...);
+    
+    // fecha ficheiro quando já nao é necessario
+    fclose(f);  
+
+    // para gravar dados adicionando-os ao final do ficheiro, usa-se o modo 'at'
+     
+*/    
+    
+    /* Programa dias do mes alterado para ler informacao do ficheiro e gravar informacao no ficheiro*/
+    int ano, mes, dias;
+    FILE *f, *f2;
+    f = fopen("in.txt", "rt");
+    f2 = fopen("out.txt", "wt");
+    if(f==NULL || f2 ==NULL){
+        return 1;
+    }
+    fscanf(f, "%d", &ano);
+    fscanf(f, "%d", &mes);
+    fclose(f);
+    
+    if(mes == 2){
+        /* teste de ano bissexto */
+        if((ano%400==0 || ano%4==0) && ano%100 != 0){
+            fprintf(f2, "29");
+        } else {
+            fprintf(f2, "28");
+        }
+    } else if (mes ==1 || mes == 3 || mes == 5 || mes = 7 || mes == 8 || mes == 10 || mes ==12){
+        fprintf(f2, "31");
+    } else {
+        fprintf(f2, "30");
+    }
+    fclose(f2);
+    
+    
+    return 0;
+}
