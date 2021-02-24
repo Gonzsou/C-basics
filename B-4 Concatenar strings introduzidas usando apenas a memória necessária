@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAXSTR 64
+
+char *Concatenar(char *str, char *str2){
+    char *pt;
+    
+    /* if str empty, allocate memory for str2 in the pointer */
+    if(!str){                                   
+        pt = (char *)malloc(strlen(str2)+1);
+        if(pt){
+            strncpy(pt, str2, strlen(str2)+1);
+        }
+    } else {
+
+        /* if str not empty, allocate memory for string str plus string str2 */
+        pt = (char *)malloc(strlen(str)+strlen(str2)+1);
+        if(pt){
+            
+            /*copy 1st string to pointer, then concatenates 2nd string to pt*/
+            strncpy(pt, str, strlen(str)+strlen(str2)-1);
+            int i = 0;
+
+            /* remove special character '\n' left by function fgets */
+            for (i=0; i < strlen(pt); i++){
+                if(pt[i] == '\n'){
+                    pt[i] = '\0';
+                }
+            } 
+            strncat(pt, str2,strlen(str)+strlen(str2)-1);
+
+            /*free memory allocated to str ??? Where did occur the allocation???*/
+            free(str);
+        }
+    }
+    return pt;
+}
+
+int main() {
+    
+    char *texto = NULL;
+    char str[MAXSTR];
+
+    while(!feof(stdin)){
+        if(fgets(str, MAXSTR, stdin)){ 
+            texto = Concatenar(texto, str);
+        }
+    }
+    printf("%s", texto);
+    free(texto);
+    
+    return 0;
+}
